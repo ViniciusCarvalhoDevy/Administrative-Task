@@ -1,0 +1,8 @@
+com\br\vinydev\task\Main.class
+com\br\vinydev\task\App.class
+com\br\vinydev\task\models\ProductFiscal.class
+com\vinydev\admin_task\services\Files_all.class
+module-info.class
+com\br\vinydev\task\SecondaryController.class
+com\br\vinydev\task\PrimaryController.class
+com\br\vinydev\task\Menssages.class
