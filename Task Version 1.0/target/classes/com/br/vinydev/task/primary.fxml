@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="514.0" prefWidth="564.0" spacing="20.0" styleClass="panes" stylesheets="@../../../../styles/homepage.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.br.vinydev.task.PrimaryController">
+  <children>
+      <ScrollPane prefHeight="522.0" prefWidth="573.0" styleClass="panes">
+         <content>
+        <AnchorPane prefHeight="524.0" prefWidth="631.0" styleClass="panes">
+               <children>
+                  <Button fx:id="uplodXmlBotton" layoutX="14.0" layoutY="76.0" onAction="#uploadButton" prefHeight="25.0" prefWidth="211.0" styleClass="files" text="Escolha as Notas Fiscais em XML" />
+                  <Label layoutX="19.0" layoutY="40.0" styleClass="labels" stylesheets="@../../../../styles/homepage.css" text="Selecione os arquivos XMLs:" />
+                  <Label layoutX="20.0" layoutY="134.0" styleClass="labels" stylesheets="@../../../../styles/homepage.css" text="Selecione os Campos dos Produto no XML:" />
+                  <CheckBox fx:id="refProd" layoutX="21.0" layoutY="201.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Referência">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <CheckBox fx:id="cfopProd" layoutX="112.0" layoutY="201.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="CFOP">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <CheckBox fx:id="infoProd" layoutX="237.0" layoutY="201.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Informação Adicional (Ex: Anvisa, Lote)">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <CheckBox fx:id="nameProd" layoutX="23.0" layoutY="233.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Nome">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <CheckBox fx:id="unitBuy" layoutX="237.0" layoutY="269.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Unidade de Compra">
+                     <textFill>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                     </textFill>
+                  </CheckBox>
+                  <CheckBox fx:id="supplier" layoutX="112.0" layoutY="233.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Fornecedor">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <CheckBox fx:id="ncmProd" layoutX="22.0" layoutY="269.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="NCM">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <CheckBox fx:id="valueProd" layoutX="112.0" layoutY="269.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Valor Unitário">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <Label layoutX="23.0" layoutY="312.0" styleClass="labels" stylesheets="@../../../../styles/homepage.css" text="Selecione a Planilha que serpa salvo os dados: ">
+                     <textFill>
+                     </textFill>
+                  </Label>
+                  <Pane layoutX="381.0" layoutY="440.0" prefHeight="14.0" prefWidth="42.0" styleClass="bg-color" />
+                  <Pane layoutX="468.0" layoutY="440.0" prefHeight="18.0" prefWidth="42.0" styleClass="bg-color" />
+                  <ImageView fitHeight="70.0" fitWidth="143.0" layoutX="375.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../styles/Images/Convert-XML-to-Excel-using-CSharp-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="saveInSheet" layoutX="25.0" layoutY="401.0" mnemonicParsing="false" onAction="#extractAndSave" prefHeight="25.0" prefWidth="70.0" styleClass="upload" text="Extrair" />
+                  <CheckBox id="todosCheckBox" fx:id="AllCheck" layoutX="22.0" layoutY="166.0" mnemonicParsing="false" onAction="#allCheck" onInputMethodTextChanged="#allCheck" onKeyPressed="#allCheck" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Todos">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <Button fx:id="chooseSheet" layoutX="22.0" layoutY="342.0" onAction="#ChooseSheet" prefHeight="25.0" prefWidth="213.0" styleClass="files" text="Escolha a Planilha Excel" />
+                  <CheckBox fx:id="origProd" layoutX="237.0" layoutY="233.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Origem da Tributação">
+                     <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <ImageView fitHeight="79.0" fitWidth="221.0" layoutX="350.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../styles/Images/loco_fundo_branco_sem_marca-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

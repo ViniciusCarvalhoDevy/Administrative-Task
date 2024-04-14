@@ -1,0 +1,46 @@
+#firstScreen{
+    -fx-background-color:#96A6A5;
+}
+
+.files{
+    -fx-background-color:#fff;
+    -fx-font-weight: bold;
+    -fx-alignment:CENTER;
+    -fx-cursor:hand;
+}
+.files:hover{
+    -fx-background-color:#2263A1;
+    -fx-text-fill: #fff;
+}
+.upload:hover{
+    -fx-background-color:#2263A1;
+    -fx-text-fill: #fff;
+}
+.upload{
+    -fx-background-color:#fff;
+    -fx-font-weight: bold;
+    -fx-alignment:CENTER;
+    -fx-cursor:hand;
+}
+
+.labels{
+   -fx-font-weight:bold;
+   -fx-font-size:14px;
+   -fx-text-fill: #000;
+}
+.panes{
+    -fx-background-color:#96A6A5;
+}
+.bg-color{
+    -fx-background-color:#fff;
+}
+#todosCheckBox{
+    -fx-font-weight:bold;
+    
+}
+.checkBox{
+    -fx-cursor:hand;
+    -fx-font-weight:500;
+    -fx-text-fill: #000;
+}
+
