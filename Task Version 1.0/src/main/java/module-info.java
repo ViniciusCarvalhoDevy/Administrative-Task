@@ -6,6 +6,7 @@ module com.br.vinydev.task {
     requires java.xml;
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
+    requires org.apache.logging.log4j;
     opens com.br.vinydev.task to javafx.fxml;
     exports com.br.vinydev.task;
 }

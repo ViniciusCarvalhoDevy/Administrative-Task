@@ -18,6 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 
@@ -26,17 +27,22 @@ import java.util.List;
  * @author Vinicius
  */
 public class Files_all {
-    public static Element readXmls(File file) {
-      
+    public static List<Element> readXmls(List<File> files) {
+      List<Element> roots = new ArrayList<>();
+
     try{
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         // Lê o arquivo XML e converter em um document
-        Document doc = dBuilder.parse(file);
-        doc.getDocumentElement().normalize();
-        Element root = doc.getDocumentElement();
+        
+        for(File file:files){
+            Document doc = dBuilder.parse(file);
+            doc.getDocumentElement().normalize();
+            roots.add(doc.getDocumentElement());
+        }
+        
 
-        return root;
+        return roots;
         
     }catch (Exception e ){
         throw new RuntimeException("Erro In Read File XMLs!\n Message: " + e.getMessage());
@@ -47,49 +53,64 @@ public class Files_all {
     public static Boolean witreSheet(List<Element> root,ArrayList<Boolean> list,String mySheet){
         ArrayList<ProductFiscal> listProdct = new ArrayList<>();  
         List<NodeList> listFiles = new ArrayList<>();
-
+        
         int indexRow = 0;
+       
         try{
-            for (Element element:root ){
+                for (Element element:root ){
+       
+                    if(element.getNodeName().equalsIgnoreCase("nfeProc")){
+                            NodeList supplier = element.getElementsByTagName("xNome") ;
+                            NodeList dataEmit = element.getElementsByTagName("dhEmi") ;
+                            NodeList numberNF = element.getElementsByTagName("nNF") ;
+                            NodeList nodeListProd = element.getElementsByTagName("det");
+                            
+                            String supplierName = supplier.item(0).getTextContent();
+                            String dataEmitString = dataEmit.item(0).getTextContent();
+                            String numberNFString = numberNF.item(0).getTextContent();
+                               for (int i = 0; i < nodeListProd.getLength()-1; i++){
+                                       Node node = nodeListProd.item(i);
+                                       if (node.getNodeType() == Node.ELEMENT_NODE) {
+                                           Element det = (Element) node;
+                                           ProductFiscal prod = new ProductFiscal();
+                                               prod.setRef(((list.get(0)) ? det.getElementsByTagName("cProd").item(0).getTextContent() : "")); 
+                                               prod.setName(((list.get(1)) ? det.getElementsByTagName("xProd").item(0).getTextContent() : ""));
+                                               prod.setOrig(((list.get(2)) ? det.getElementsByTagName("orig").item(0).getTextContent(): ""));
+                                               prod.setCfop(((list.get(3)) ? det.getElementsByTagName("CFOP").item(0).getTextContent(): ""));
+                                               prod.setUndBuy(((list.get(4)) ?det.getElementsByTagName("uCom").item(0).getTextContent(): ""));
+                                               prod.setValueUnit(((list.get(5)) ? det.getElementsByTagName("vProd").item(0).getTextContent(): ""));
+                                               prod.setNcm(((list.get(6)) ? det.getElementsByTagName("NCM").item(0).getTextContent(): ""));
+                                               prod.setSupplier(((list.get(7)) ? supplierName: "")); 
+                                               prod.setDateEmitNF(((list.get(9)) ? dataEmitString: ""));
+                                               prod.setNunberNF(((list.get(10)) ? numberNFString: ""));
+                                               try{
+                                                   prod.setInfoAdd(((list.get(8)) ? det.getElementsByTagName("infAdProd").item(0).getTextContent(): ""));
+                                               }catch(Exception e){
+                                                   prod.setInfoAdd("Não informado");
+                                               }
 
-                NodeList nodeListProd = element.getElementsByTagName("det");
-                NodeList supplier = element.getElementsByTagName("xNome");
-                String supplierName = supplier.item(0).getTextContent();
-
-                   for (int i = 0; i < nodeListProd.getLength(); i++){
-                           Node node = nodeListProd.item(i);
-                           if (node.getNodeType() == Node.ELEMENT_NODE) {
-                               Element det = (Element) node;
-                               ProductFiscal prod = new ProductFiscal();
-                                   prod.setRef(((list.get(0)) ? det.getElementsByTagName("cProd").item(0).getTextContent() : "")); 
-                                   prod.setName(((list.get(1)) ? det.getElementsByTagName("xProd").item(0).getTextContent() : ""));
-                                   prod.setOrig(((list.get(2)) ? det.getElementsByTagName("orig").item(0).getTextContent(): ""));
-                                   prod.setCfop(((list.get(3)) ? det.getElementsByTagName("CFOP").item(0).getTextContent(): ""));
-                                   prod.setUndBuy(((list.get(4)) ?det.getElementsByTagName("uCom").item(0).getTextContent(): ""));
-                                   prod.setValueUnit(((list.get(5)) ? det.getElementsByTagName("vProd").item(0).getTextContent(): ""));
-                                   prod.setNcm(((list.get(6)) ? det.getElementsByTagName("NCM").item(0).getTextContent(): ""));
-                                   prod.setSupplier(((list.get(7)) ? supplierName: "")); 
-                                   try{
-                                       prod.setInfoAdd(((list.get(8)) ? det.getElementsByTagName("infAdProd").item(0).getTextContent(): ""));
-                                   }catch(Exception e){
-                                       prod.setInfoAdd("Não informado");
+                                              
+                                           listProdct.add(indexRow, prod);
+                                           
+                                           indexRow++;
+                                       }
                                    }
+                                   }
+                                }      
+                               
+                        
+                                try{
+                                     
+                                     saveInSheet(listProdct, indexRow, mySheet); 
+                                     return true; 
+                                }catch(RuntimeException e){
+                                    return false;
+                                }
+                        
+            }catch (Exception e ){
+                throw new RuntimeException("1:"+e.getMessage());
 
-                               listProdct.add(indexRow, prod);
-                               indexRow++;
-                           }
-                       }
-                   } 
-                try{
-                     saveInSheet(listProdct, indexRow, mySheet); 
-                     return true; 
-                }catch(RuntimeException e){
-                    return false;
-                }
-        }catch (Exception e ){
-            throw new RuntimeException("Erro de localização de campo " + e.getMessage());
-           
-        }
+            }
     }
     public static Boolean saveInSheet(
             ArrayList<ProductFiscal> list,int indexRow,String mySheet
@@ -128,7 +149,7 @@ public class Files_all {
             outFile.close();
             return true;
         }catch(Exception e){
-            throw new RuntimeException("ERRO of not found Sheet! Message: " + e.getMessage());
+            throw new RuntimeException( "2:"+e.getMessage());
             
         }
     

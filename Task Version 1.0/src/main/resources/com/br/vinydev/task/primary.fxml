@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="514.0" prefWidth="564.0" spacing="20.0" styleClass="panes" stylesheets="@../../../../styles/homepage.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.br.vinydev.task.PrimaryController">
+<VBox alignment="CENTER" prefHeight="514.0" prefWidth="564.0" spacing="20.0" styleClass="panes" stylesheets="@../../../../styles/homepage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.br.vinydev.task.PrimaryController">
   <children>
       <ScrollPane prefHeight="522.0" prefWidth="573.0" styleClass="panes">
          <content>
-        <AnchorPane prefHeight="524.0" prefWidth="631.0" styleClass="panes">
+        <AnchorPane prefHeight="524.0" prefWidth="794.0" styleClass="panes">
                <children>
                   <Button fx:id="uplodXmlBotton" layoutX="14.0" layoutY="76.0" onAction="#uploadButton" prefHeight="25.0" prefWidth="211.0" styleClass="files" text="Escolha as Notas Fiscais em XML" />
                   <Label layoutX="19.0" layoutY="40.0" styleClass="labels" stylesheets="@../../../../styles/homepage.css" text="Selecione os arquivos XMLs:" />
@@ -51,13 +51,21 @@
                      <textFill>
                      </textFill>
                   </CheckBox>
+                  <CheckBox fx:id="numberNFE" layoutX="388.0" layoutY="233.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Numero NF" >
+                        <textFill>
+                     </textFill>
+                  </CheckBox>
+                  <CheckBox fx:id="dateEmit" layoutX="391.0" layoutY="269.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Data emissão"> 
+                     <textFill>
+                     </textFill>
+                    </CheckBox>
                   <Label layoutX="23.0" layoutY="312.0" styleClass="labels" stylesheets="@../../../../styles/homepage.css" text="Selecione a Planilha que serpa salvo os dados: ">
                      <textFill>
                      </textFill>
                   </Label>
-                  <Pane layoutX="381.0" layoutY="440.0" prefHeight="14.0" prefWidth="42.0" styleClass="bg-color" />
-                  <Pane layoutX="468.0" layoutY="440.0" prefHeight="18.0" prefWidth="42.0" styleClass="bg-color" />
-                  <ImageView fitHeight="70.0" fitWidth="143.0" layoutX="375.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+                  <Pane layoutX="301.0" layoutY="392.0" prefHeight="14.0" prefWidth="42.0" styleClass="bg-color" />
+                  <Pane layoutX="388.0" layoutY="392.0" prefHeight="18.0" prefWidth="42.0" styleClass="bg-color" />
+                  <ImageView fitHeight="70.0" fitWidth="143.0" layoutX="295.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../styles/Images/Convert-XML-to-Excel-using-CSharp-removebg-preview.png" />
                      </image>
@@ -67,16 +75,17 @@
                      <textFill>
                      </textFill>
                   </CheckBox>
-                  <Button fx:id="chooseSheet" layoutX="22.0" layoutY="342.0" onAction="#ChooseSheet" prefHeight="25.0" prefWidth="213.0" styleClass="files" text="Escolha a Planilha Excel" />
+                  <Button fx:id="chooseSheet" layoutX="21.0" layoutY="351.0" onAction="#ChooseSheet" prefHeight="25.0" prefWidth="213.0" styleClass="files" text="Escolha a Planilha Excel" />
                   <CheckBox fx:id="origProd" layoutX="237.0" layoutY="233.0" mnemonicParsing="false" styleClass="checkBox" stylesheets="@../../../../styles/homepage.css" text="Origem da Tributação">
                      <textFill>
                      </textFill>
                   </CheckBox>
-                  <ImageView fitHeight="79.0" fitWidth="221.0" layoutX="350.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="79.0" fitWidth="221.0" layoutX="295.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../styles/Images/loco_fundo_branco_sem_marca-removebg-preview.png" />
                      </image>
                   </ImageView>
+     
                </children>
             </AnchorPane>
          </content>

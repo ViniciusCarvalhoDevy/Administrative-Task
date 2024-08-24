@@ -52,7 +52,7 @@
       <artifactId>activation</artifactId>
       <version>1.1.1</version>
     </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.7.1</version>
@@ -69,7 +69,8 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.7.1</version>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
+    
     </dependencies>
     <build>
         <plugins>
@@ -164,12 +165,11 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
-            </plugin>-->
-            
+            </plugin>
         </plugins>
     </build>
     <name>Admin-Task</name>

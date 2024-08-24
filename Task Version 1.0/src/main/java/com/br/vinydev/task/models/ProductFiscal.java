@@ -23,6 +23,25 @@ public class ProductFiscal {
     private String infoAdd;
     private String supplier;
     private String ncm;
+
+    private String nunberNF;
+    private String dateEmitNF;
+    public String getNunberNF() {
+        return nunberNF;
+    }
+
+    public void setNunberNF(String nunberNF) {
+        this.nunberNF = nunberNF;
+    }
+
+    public String getDateEmitNF() {
+        return dateEmitNF;
+    }
+
+    public void setDateEmitNF(String dateEmitNF) {
+        this.dateEmitNF = dateEmitNF;
+    }
+    
     public String getNcm() {
         return ncm;
     }
@@ -122,6 +141,8 @@ public class ProductFiscal {
         values.add(prod.getSupplier());
         values.add(prod.getValueUnit());
         values.add(prod.getInfoAdd());
+        values.add(prod.getDateEmitNF());
+        values.add(prod.getNunberNF());
         return values;
     }
     

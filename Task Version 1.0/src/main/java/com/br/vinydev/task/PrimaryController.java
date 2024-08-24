@@ -16,8 +16,6 @@ import org.w3c.dom.Element;
 public class PrimaryController {
     private List<Element> datas = new ArrayList<>();
     private String mySheet;
-    private int vezes = 0;
-    private int vezes_two = 0;
     @FXML
     private Button uplodXmlBotton;
     @FXML
@@ -46,7 +44,10 @@ public class PrimaryController {
     private Button reload;
     @FXML
     private CheckBox AllCheck;
-
+    @FXML
+    private CheckBox dateEmit;
+    @FXML
+    private CheckBox numberNFE;
     
 
     
@@ -59,29 +60,21 @@ public class PrimaryController {
         Stage stage = (Stage) uplodXmlBotton.getScene().getWindow();
         
         List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
-    
+ 
         if (selectedFiles != null){
             uplodXmlBotton.setStyle("-fx-background-color:#2263A1;-fx-text-fill:#fff;");
-            for (File file : selectedFiles) {
-                try{
-                this.datas.add(Files_all.readXmls(file));
-                }catch(RuntimeException e){
-                    Menssages.showMessage("Erro!", "Erro em Carregar os Arquivos em Xml!");
-                }
-                if(this.vezes <1){
+            try{
+                this.datas = Files_all.readXmls(selectedFiles);
+                if(!this.datas.isEmpty()){
                 Menssages.showMessage("Sucesso!", "XML Carregado Com Sucesso!");
-                vezes++;
                 }
-                
-                
-                
-            }
-                
+ 
+            }catch(RuntimeException e){
+                Menssages.showMessage("Erro!", "Erro em Carregar os Arquivos em Xml!");
+                }    
         }else{
             uplodXmlBotton.setStyle("-fx-background-color:#fff;-fx-text-fill:#000;");
-            if(this.vezes_two <1){
-                Menssages.showMessage("Aviso!", "XML Não Carregado!");
-            } 
+            Menssages.showMessage("Aviso!", "XML Não Carregado!");   
         }
     }
     
@@ -118,6 +111,8 @@ public class PrimaryController {
            infoProd.setSelected(true);
            ncmProd.setSelected(true);
            supplier.setSelected(true);
+           dateEmit.setSelected(true);
+           numberNFE.setSelected(true);
         }else{
            AllCheck.setSelected(false);
            refProd.setSelected(false);
@@ -129,6 +124,8 @@ public class PrimaryController {
            infoProd.setSelected(false);
            ncmProd.setSelected(false);
            supplier.setSelected(false);
+           dateEmit.setSelected(false);
+           numberNFE.setSelected(false);
         }
     }
     @FXML
@@ -143,15 +140,15 @@ public class PrimaryController {
         list.add(6, ncmProd.isSelected());
         list.add(7, supplier.isSelected());
         list.add(8, infoProd.isSelected());
+        list.add(9, dateEmit.isSelected());
+        list.add(10, numberNFE.isSelected());
         try{
         Boolean results = Files_all.witreSheet(this.datas,list,this.mySheet);
         if(results){
             Menssages.showMessage("Sucesso!", "Dados Trasferidos Com Sucesso!");
-            this.vezes = 0;
-            this.vezes_two=0;
         }
-        }catch(RuntimeException e){
-            Menssages.showMessage("Erro!", "Não foi possivel Transferir Os dados para a Planilha! Causa:" + e.getCause());
+        }catch(Exception e){
+            Menssages.showMessage("Erro!", e.getMessage());
         }
     }
 
